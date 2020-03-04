@@ -28,7 +28,7 @@ deactivate () {
     fi
 
     unset VIRTUAL_ENV
-    if [ ! "$1" = "nondestructive" ] ; then
+    if [ ! "${1:-}" = "nondestructive" ] ; then
     # Self destruct!
         unset -f deactivate
     fi
@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="N:\Documents\Part 3\CS3AI18\TicTacToe_cw\venv"
+VIRTUAL_ENV="D:\Users\Joe\Documents\Uni Work\Computer Science\Year 3\CS3AI18\CS3AI18_TicTacTow_cw\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

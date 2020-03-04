@@ -35,10 +35,11 @@ class gameboard:
     def playpiece(self, col, row, val):
         self.board[col][row] = val
 
-    def displayBoard(self):
+    def displayBoard(self, window):
         print(self.board[0])
         print(self.board[1])
         print(self.board[2])
+        window.updateButtons(self.board)
 
     def isValidMove(self, col, row):
         if self.board[col][row] == "":

@@ -22,4 +22,4 @@ class HumanPlayer(Player):
     def getInput(self):
         col = input("Player " + self.val + " - Enter column: ")
         row = input("Player " + self.val + " - Enter row: ")
-        return col, row
+        return int(col), int(row)
