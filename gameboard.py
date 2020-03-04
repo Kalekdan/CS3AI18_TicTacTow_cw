@@ -4,6 +4,7 @@ class gameboard:
                       ["", "", ""],
                       ["", "", ""]]
 
+#TODO add a stalemate check
     # return value (x or o) of winner, else empty string
     def checkgamewon(self):
         # Diagonal left to right
@@ -36,9 +37,9 @@ class gameboard:
         self.board[col][row] = val
 
     def displayBoard(self, window):
-        print(self.board[0])
-        print(self.board[1])
-        print(self.board[2])
+        # print(self.board[0])
+        # print(self.board[1])
+        # print(self.board[2])
         window.updateButtons(self.board)
 
     def isValidMove(self, col, row):
