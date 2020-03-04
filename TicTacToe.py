@@ -46,10 +46,10 @@ class gameWindow(Tk):
                              [None, None, None]]
         for cols in range(3):
             for rows in range(3):
-                self.boardButtons[cols][rows] = Button(self, width=10, height=5,
+                self.boardButtons[cols][rows] = Button(self, width=3, height=1, font=("Helvetica", 45),
                                                        command=lambda c=cols, r=rows: progressGame(c, r))
                 self.boardButtons[cols][rows].grid(row=rows, column=cols + 1, columnspan=1)
-        self.textLbl = Label(self, text=players[currentPlayer].val + "'s Turn")
+        self.textLbl = Label(self, text=players[currentPlayer].val + "'s Turn", font=("Helvetica", 30))
         self.textLbl.grid(row=4, column=1, columnspan=3)
 
     def updateButtons(self, boardarr):
@@ -59,8 +59,8 @@ class gameWindow(Tk):
 
 
 board = gameboard()
-human1 = Player("x")
-human2 = Player("o")
+human1 = Player("X")
+human2 = Player("O")
 players = human1, human2
 window = gameWindow()
 window.mainloop()
