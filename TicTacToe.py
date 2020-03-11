@@ -8,12 +8,14 @@ playingVsAi = True
 isGameOver = False
 
 
+# Switch between player 1 and 0
 def togglePlayer(player):
     if player == 0:
         return 1
     return 0
 
 
+# Make the game progress one step by allowing players moves
 def progressGame(cols, rows):
     global currentPlayer
     if not isGameOver:
@@ -28,6 +30,7 @@ def progressGame(cols, rows):
     checkForGameOver()
 
 
+# Get AI to make a move
 def AIMove():
     if not isGameOver:
         global currentPlayer
@@ -37,6 +40,7 @@ def AIMove():
         currentPlayer = togglePlayer(currentPlayer)
 
 
+# Check whether the game is over and update appropriate values
 def checkForGameOver():
     global isGameOver
     window.textLbl.config(text=players[currentPlayer].val + "'s Turn")
@@ -50,6 +54,7 @@ def checkForGameOver():
         return
 
 
+# Game Window class - contains a grid of buttons
 class GameWindow(Tk):
 
     def __init__(self):
@@ -76,12 +81,14 @@ class GameWindow(Tk):
                 self.boardButtons[cols][rows].config(text=board_arr[cols][rows])
 
 
+# Setup initial values based on main menu selection
 def startGame(menu, isVsAI):
     global playingVsAi
     playingVsAi = isVsAI
     menu.destroy()
 
 
+# Main menu window class
 class MenuWindow(Tk):
     def __init__(self):
         super().__init__()
@@ -95,11 +102,15 @@ class MenuWindow(Tk):
         self.startHumanVsAIBtn.grid(row=3, column=1, columnspan=3)
 
 
+# Create the main menu
 menu = MenuWindow()
 menu.mainloop()
+# Create the game board
 board = GameBoard()
+# Create the players
 player1 = Player("X")
 player2 = Player("O")
 players = player1, player2
+# Create the main game window
 window = GameWindow()
 window.mainloop()

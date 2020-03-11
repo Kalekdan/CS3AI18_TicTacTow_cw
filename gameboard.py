@@ -1,5 +1,6 @@
 class GameBoard:
     def __init__(self):
+        # 3x3 Array representing the board
         self.board = [["", "", ""],
                       ["", "", ""],
                       ["", "", ""]]
@@ -32,15 +33,15 @@ class GameBoard:
             return self.board[2][0]
         return ""
 
+    # Update a position on the board with val
     def playpiece(self, col, row, val):
         self.board[col][row] = val
 
+    # Update the buttons on the window to match the board object
     def displayBoard(self, window):
-        # print(self.board[0])
-        # print(self.board[1])
-        # print(self.board[2])
         window.updateButtons(self.board)
 
+    # Print board to console
     def debugBoard(self):
         for cols in range(3):
             for rows in range(3):
@@ -48,11 +49,13 @@ class GameBoard:
             print()
         print()
 
+    # Check that move is valid (nothing already in that space)
     def isValidMove(self, col, row):
         if self.board[col][row] == "":
             return True
         return False
 
+    # Check if any moves remaining - if not, it is a tie
     def movesRemaining(self):
         for cols in range(3):
             for rows in range(3):

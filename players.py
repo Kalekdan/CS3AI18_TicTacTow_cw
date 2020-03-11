@@ -7,6 +7,7 @@ class Player:
     def __init__(self, val):
         self.val = val
 
+    # Deprecated - make a move using the console input
     def makeMoveConsole(self, board):
         move = self.getInput()
         move_is_valid = board.isValidMove(move[0], move[1])
@@ -16,6 +17,7 @@ class Player:
             move_is_valid = board.isValidMove(move[0], move[1])
         board.playpiece(move[0], move[1], self.val)
 
+    # Makes a move on the board using positions provided
     def make_move_explicit(self, board, move):
         move_is_valid = board.isValidMove(move[0], move[1])
         while not move_is_valid:
@@ -23,41 +25,45 @@ class Player:
             return -1
         board.playpiece(move[0], move[1], self.val)
 
+    # Minimax algorithm, returns a score for the best move on the board depending on if maximizer or minimizer
     def minimax(self, board, depth, is_maximizer):
-        depth_penalty = 0
-        # if is_maximizer:
-        #     depth_penalty = depth
-        # else:
-        #     depth_penalty = -depth
+        # If x wins
         if board.check_game_won() == "X":
-            # board.debugBoard()
-            return -1 + depth_penalty
+            return -1
+        # If o wins
         if board.check_game_won() == "O":
-            # board.debugBoard()
-            return 1 + depth_penalty
+            return 1
+        # If it's a tie
         if not board.movesRemaining():
-            # board.debugBoard()
-            return 0 + depth_penalty
+            return 0
 
+        # If maximizing
         if is_maximizer:
+            # Initialise best val to a low number
             best_val = -10000
+            # For each move
             for cols in range(3):
                 for rows in range(3):
                     if board.isValidMove(cols, rows):
                         board.playpiece(cols, rows, "O")
+                        # Call minimax recursively
                         best_val = max(best_val, self.minimax(board, depth + 1, not is_maximizer))
                         board.playpiece(cols, rows, "")
             return best_val
-        else:
+        else:  # If minimizing
+            # Initialise best val to a high number
             best_val = 10000
+            # For each move
             for cols in range(3):
                 for rows in range(3):
                     if board.isValidMove(cols, rows):
                         board.playpiece(cols, rows, "X")
+                        # Call minimax recursively
                         best_val = min(best_val, self.minimax(board, depth + 1, not is_maximizer))
                         board.playpiece(cols, rows, "")
             return best_val
 
+    # Get the ai to make a move using minimax
     def make_move_ai(self, board):
         best_move = -1, -1
         if self.val == "O":
@@ -87,6 +93,7 @@ class Player:
         print("Player " + self.val + ": Minimax Score = " + str(best_val) + " - Optimal move = " + str(best_move))
         board.playpiece(best_move[0], best_move[1], self.val)
 
+    # Deprecated - Get the user input from the console
     def getInput(self):
         col = input("Player " + self.val + " - Enter column: ")
         row = input("Player " + self.val + " - Enter row: ")
